@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Codec">
+      <UniqueIdentifier>{e2ad0fa7-f4d7-4f0f-9613-19d3628a245f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Codec">
+      <UniqueIdentifier>{a8d53192-4f61-4240-8c6f-0a3d118e5d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataStructures">
+      <UniqueIdentifier>{461e8744-6b05-4de7-8b3e-78fabad1d2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data Structures">
+      <UniqueIdentifier>{d0c3eced-fa83-4009-b031-17b128398b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Archive">
+      <UniqueIdentifier>{9010d9a8-47c5-4641-8f6a-5fb2bde193e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Archive">
+      <UniqueIdentifier>{6d6f0190-8fc0-4e95-bf5f-a2a65120df28}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AdaHuffman.cpp">
+      <Filter>Source Files\Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="MinHeap.cpp">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Huffman.cpp">
+      <Filter>Source Files\Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="Compressor.cpp">
+      <Filter>Source Files\Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="Archiver.cpp">
+      <Filter>Source Files\Archive</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AdaHuffman.h">
+      <Filter>Header Files\Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="MinHeap.h">
+      <Filter>Header Files\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Huffman.h">
+      <Filter>Header Files\Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="Compressor.h">
+      <Filter>Header Files\Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="Archiver.h">
+      <Filter>Header Files\Archive</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
