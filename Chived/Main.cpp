@@ -45,11 +45,12 @@ int main() {
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" }; // store example
 	//const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // rle example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // adaptive huffman example
-	const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // huffman example
+	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // huffman example
+	const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // shannon-fano example
 
 
 	std::string archiveName = "stuff.car";
-	Algo compression = Algo::huff;
+	Algo compression = Algo::shan_fano;
 
 	Archiver::createArchive(1, path, tmp.string(), archiveName, compression);
 

@@ -17,13 +17,18 @@ void Huffman::compress(std::stringstream & rawData, std::ostream & compressedDat
 
 	build_Frequencies(rawDataString);
 
+	std::cout << "finished building freqs" << std::endl;
+
 	//build huffman tree and encoding map 
 	buildTree();
 
-	char bilb; //bits in last byte
-	unsigned char charcount; //number of chars and frequencies
+	std::cout << "finished building tree" << std::endl;
 
-	charcount = (unsigned char)frequencies.size();
+
+	char bilb; //bits in last byte
+	int charcount; //number of chars and frequencies
+
+	charcount = (int)frequencies.size();
 
 	std::vector<char> huffchars; //encoded characters
 	std::vector<int> freqs; //character frequencies
@@ -34,15 +39,23 @@ void Huffman::compress(std::stringstream & rawData, std::ostream & compressedDat
 		freqs.push_back(it->second);
 	}
 
+
 	std::stringstream fullbits;
+	std::vector<char> fullvec;
 	for (int i = 0; i < rawDataString.length(); i++) {
 		char nextchar = rawDataString.at(i);
 
-		std::string temp(&encode[nextchar][0]);
-		fullbits.write(&encode[nextchar][0], encode[nextchar].length());
+		for (int j = 0; j < encode[nextchar].length(); j++) {
+			fullvec.push_back(encode[nextchar][j]);
+		}
+		//std::string temp(&encode[nextchar][0]);
+		//fullbits.write(&encode[nextchar][0], encode[nextchar].length());
 	}
 
-	std::string fullStr = fullbits.str();
+	std::cout << "finished building fullstr" << std::endl;
+
+	//std::string fullStr = fullbits.str();
+	std::string fullStr = fullvec.data();
 
 	bilb = fullStr.length() % 8;
 
@@ -69,9 +82,12 @@ void Huffman::compress(std::stringstream & rawData, std::ostream & compressedDat
 		outputBuffer.push_back(byte);
 	}
 
+	std::cout << "finished filling output buffer" << std::endl;
+
 	//write metadata to file
 	compressedData.put(bilb);
-	compressedData.put(charcount);
+	compressedData.write((const char*)&charcount, sizeof(charcount));
+	//compressedData.put(charcount);
 	compressedData.write(huffchars.data(), charcount);
 	compressedData.write((const char*)freqs.data(), charcount * sizeof(int));
 	compressedData << "Data\n";
@@ -86,7 +102,7 @@ void Huffman::compress(std::stringstream & rawData, std::ostream & compressedDat
 }
 
 void Huffman::decompres(std::stringstream & compressedData, std::iostream & rawData, char bits_in_last_byte, 
-	char charcount, char * huffchars, int * freqs)
+	int charcount, char * huffchars, int * freqs)
 {
 	std::string inputBuffer = compressedData.str();
 

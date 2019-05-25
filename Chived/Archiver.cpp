@@ -120,7 +120,9 @@ void Archiver::createArchive(int count, const char ** paths, std::string targetP
 		Compressor::adaptiveHuffmanEncode(tempstream, archive);
 		break;
 	case Algo::shan_fano:
-
+		archive << "shan_fano\n";
+		Compressor::shannonFanoEncode(tempstream, archive);
+		break;
 	default:
 	case Algo::store:
 		archive << "store\n";
@@ -196,7 +198,7 @@ void Archiver::extractArchive(std::string archivePath, std::string targetPath)
 
 	Algo compression;
 	char bilb = 0;
-	char charcount = 0;
+	int charcount = 0;
 	char * huffchars = nullptr;
 	int * freqs = nullptr;
 
@@ -217,7 +219,19 @@ void Archiver::extractArchive(std::string archivePath, std::string targetPath)
 		compression = Algo::huff;
 
 		input.read(&bilb, 1);
-		input.read(&charcount, 1);
+		input.read((char *)&charcount, sizeof(charcount));
+
+		huffchars = new char[charcount];
+		freqs = new int[charcount];
+
+		input.read(huffchars, charcount);
+		input.read((char *)freqs, charcount * sizeof(int));
+	}
+	else if (line == "shan_fano") {
+		compression = Algo::shan_fano;
+
+		input.read(&bilb, 1);
+		input.read((char *)&charcount, sizeof(charcount));
 
 		huffchars = new char[charcount];
 		freqs = new int[charcount];
@@ -260,7 +274,8 @@ void Archiver::extractArchive(std::string archivePath, std::string targetPath)
 		Compressor::adaptiveHuffmanDecode(tempstream, finalDataStream, bilb);
 		break;
 	case Algo::shan_fano:
-
+		Compressor::shannonFanoDecode(tempstream, finalDataStream, bilb, charcount, huffchars, freqs);
+		break;
 	default:
 	case Algo::store:
 		Compressor::unstoreData(tempstream, finalDataStream);

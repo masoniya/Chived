@@ -20,8 +20,12 @@ public:
 
 	static void huffmanEncode(std::stringstream &rawData, std::ostream &compressedData);
 	static void huffmanDecode(std::stringstream &compressedData, std::iostream &rawData, char bits_in_last_byte, 
-		char charcount, char * huffchars, int * freqs);
+		int charcount, char * huffchars, int * freqs);
 
 	static void adaptiveHuffmanEncode(std::stringstream &rawData, std::ostream &compressedData);
 	static void adaptiveHuffmanDecode(std::stringstream &compressedData, std::iostream &rawData, char bits_in_last_byte);
+
+	static void shannonFanoEncode(std::iostream &rawData, std::ostream &compressedData);
+	static void shannonFanoDecode(std::stringstream &compressedData, std::iostream &rawData, char bits_in_last_byte,
+		int charcount, char * huffchars, int * freqs);
 };

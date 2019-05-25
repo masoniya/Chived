@@ -12,7 +12,7 @@ class Huffman
 public:
 	void compress(std::stringstream &rawData, std::ostream &compressedData);
 	void decompres(std::stringstream &compressedData, std::iostream &rawData, char bits_in_last_byte, 
-		char charcount, char * huffchars, int * freqs);
+		int charcount, char * huffchars, int * freqs);
 
 private:
 
