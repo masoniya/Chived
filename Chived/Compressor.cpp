@@ -35,7 +35,7 @@ void Compressor::RLEencode(std::iostream & rawData, std::ostream & compressedDat
 
 			compressedSize += 2;
 
-			std::cout << currentchar << " : " << (int)charcount << std::endl;
+			//std::cout << currentchar << " : " << (int)charcount << std::endl;
 			break;
 		}
 
@@ -103,8 +103,8 @@ void Compressor::huffmanEncode(std::stringstream & rawData, std::ostream & compr
 	algorithm.compress(rawData, compressedData);
 }
 
-void Compressor::huffmanDecode(std::stringstream & compressedData, std::iostream & rawData, 
-	char bits_in_last_byte, int charcount, char * huffchars, int * freqs)
+void Compressor::huffmanDecode(std::stringstream & compressedData, std::iostream & rawData, char bits_in_last_byte, 
+	int charcount, char * huffchars, int * freqs)
 {
 	Huffman algorithm;
 
@@ -446,7 +446,8 @@ void Compressor::shannonFanoEncode(std::iostream & rawData, std::ostream & compr
 	std::cout << "Compression Ratio : " << 1.0 * compressedSize / rawSize << std::endl;
 }
 
-void Compressor::shannonFanoDecode(std::stringstream & compressedData, std::iostream & rawData, char bits_in_last_byte, int charcount, char * huffchars, int * freqs)
+void Compressor::shannonFanoDecode(std::stringstream & compressedData, std::iostream & rawData, char bits_in_last_byte, 
+	int charcount, char * huffchars, int * freqs)
 {
 	std::unordered_map<char, int> frequencies;
 	std::unordered_map<char, std::vector<int>> codes;

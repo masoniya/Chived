@@ -42,7 +42,7 @@ int main() {
 		fs::remove(archive);
 	}
 
-	/*Engine engine;
+	Engine engine;
 
 	try {
 		engine.start();
@@ -52,7 +52,7 @@ int main() {
 		getchar();
 		return EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;*/
+	return EXIT_SUCCESS;
 
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" }; // store example
 	//const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // rle example
@@ -62,16 +62,16 @@ int main() {
 	const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // shannon-fano example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };  // shannon-fano example ~10 sec encoding / ~17 sec decoding
 
-	std::string archiveName = "stuff.car";
-	//std::string extractDirectory = "C:\\Users\\ASUS\\Desktop";
-	std::string extractDirectory = tmp.string();
+	std::string archiveName = "stuff.car"; // what to name the archive
+	std::string archiveDirectory = tmp.string(); // where to put the archive
+
 	Algo compression = Algo::shan_fano;
 
-	Archiver::createArchive(1, path, tmp.string(), archiveName, compression);
+	Archiver::createArchive(1, path, archiveDirectory, archiveName, compression);
 
-	std::string extractName = (tmp / "stuff.car").string();
+	std::string extractName = (tmp / "stuff.car").string(); // what archive to extract
+	std::string extractDirectory = tmp.string(); // where to put the extracted data
 
-	//Archiver::extractArchive(extractName, tmp.string());
 	Archiver::extractArchive(extractName, extractDirectory);
 
 	getchar();
