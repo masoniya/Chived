@@ -5,7 +5,7 @@
 
 #include "Archiver.h"
 #include "Compressor.h"
-
+#include "Engine.h"
 
 namespace fs = std::filesystem;
 
@@ -42,23 +42,37 @@ int main() {
 		fs::remove(archive);
 	}
 
+	Engine engine;
+
+	try {
+		engine.start();
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		getchar();
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
+
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" }; // store example
 	//const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // rle example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // adaptive huffman example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // huffman example
 	//const char * path[1] = { "D:\\Temp Files\\test.txt" }; // shannon-fano example
-	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // shannon-fano example
-	const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };
-
+	const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // shannon-fano example
+	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };
 
 	std::string archiveName = "stuff.car";
+	//std::string extractDirectory = "C:\\Users\\ASUS\\Desktop";
+	std::string extractDirectory = tmp.string();
 	Algo compression = Algo::shan_fano;
 
 	Archiver::createArchive(1, path, tmp.string(), archiveName, compression);
 
 	std::string extractName = (tmp / "stuff.car").string();
 
-	Archiver::extractArchive(extractName, tmp.string());
+	//Archiver::extractArchive(extractName, tmp.string());
+	Archiver::extractArchive(extractName, extractDirectory);
 
 	getchar();
 	return 0;
