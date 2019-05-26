@@ -606,7 +606,7 @@ void Compressor::shannonFanoDecode(std::stringstream & compressedData, std::iost
 	/************************/
 
 	//reverse the keys and codes in the map for lookup
-	std::map<std::string, char> codechars;
+	std::unordered_map<std::string, char> codechars;
 	size_t longestCode = 0;
 
 	for (auto it = codes.begin(); it != codes.end(); it++) {

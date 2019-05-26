@@ -42,7 +42,7 @@ int main() {
 		fs::remove(archive);
 	}
 
-	Engine engine;
+	/*Engine engine;
 
 	try {
 		engine.start();
@@ -52,7 +52,7 @@ int main() {
 		getchar();
 		return EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;
+	return EXIT_SUCCESS;*/
 
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" }; // store example
 	//const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // rle example
@@ -60,7 +60,7 @@ int main() {
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // huffman example
 	//const char * path[1] = { "D:\\Temp Files\\test.txt" }; // shannon-fano example
 	const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // shannon-fano example
-	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };
+	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };  // shannon-fano example ~10 sec encoding / ~17 sec decoding
 
 	std::string archiveName = "stuff.car";
 	//std::string extractDirectory = "C:\\Users\\ASUS\\Desktop";
