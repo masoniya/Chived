@@ -46,7 +46,9 @@ int main() {
 	//const char * path[1] = { "D:\\Temp Files\\testfile.txt" }; // rle example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // adaptive huffman example
 	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // huffman example
-	const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code" }; // shannon-fano example
+	//const char * path[1] = { "D:\\Temp Files\\test.txt" }; // shannon-fano example
+	//const char * path[1] = { "D:\\Archives\\vulkan-tutorial\\code\\01_instance_creation.htm" }; // shannon-fano example
+	const char * path[1] = { "D:\\Archives\\vulkan-tutorial" };
 
 
 	std::string archiveName = "stuff.car";

@@ -308,8 +308,32 @@ void Compressor::shannonFanoEncode(std::iostream & rawData, std::ostream & compr
 		for (i = curr.start; i < curr.end; i++) {
 
 			if (subTotal + frequencies[huffchars[i]] > halfTotal) {
+
+				//both total are equally close
 				//add the last element
-				if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) < std::abs(halfTotal - subTotal)) {
+				if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) - std::abs(halfTotal - subTotal) < 0.000001f) {
+					//std::cout << "Close Enough" << std::endl;
+					subTotal += frequencies[huffchars[i]];
+					int splitIndex = i + 1;
+					Bounds bottom = { curr.start, splitIndex, subTotal };
+					Bounds top = { splitIndex, curr.end, curr.total - subTotal };
+
+					//push 1 for the bottom
+					for (int j = curr.start; j < splitIndex; j++) {
+						codes[huffchars[j]].push_back(1);
+					}
+					//push 0 for the top
+					for (int j = splitIndex; j < curr.end; j++) {
+						codes[huffchars[j]].push_back(0);
+					}
+
+					indices.push(bottom);
+					indices.push(top);
+					break;
+				}
+
+				//add the last element
+				else if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) < std::abs(halfTotal - subTotal)) {
 					subTotal += frequencies[huffchars[i]];
 					int splitIndex = i + 1;
 					Bounds bottom = { curr.start, splitIndex, subTotal };
@@ -435,31 +459,31 @@ void Compressor::shannonFanoDecode(std::stringstream & compressedData, std::iost
 	//sort the characters
 	int i = 0;
 	for (auto it = frequencies.begin(); it != frequencies.end(); it++, i++) {
-		huffchars[i] = it->first;
+		//huffchars[i] = it->first;
 		std::vector<int> code;
 		codes.emplace(it->first, code);
 	}
 
 	//selection sort
 	//Iterate over all sub-arrays of data
-	for (i = 0; i < charcount - 1; i++) {
+	//for (i = 0; i < charcount - 1; i++) {
 
-		int min = frequencies[huffchars[i]];
-		int minIndex = i;
+	//	int min = frequencies[huffchars[i]];
+	//	int minIndex = i;
 
-		//Iterate over each element of the sub-array
-		for (int j = i + 1; j < charcount; j++) {
-			if (frequencies[huffchars[j]] < min) {
-				min = frequencies[huffchars[j]];
-				minIndex = j;
-			}
-		}
+	//	//Iterate over each element of the sub-array
+	//	for (int j = i + 1; j < charcount; j++) {
+	//		if (frequencies[huffchars[j]] < min) {
+	//			min = frequencies[huffchars[j]];
+	//			minIndex = j;
+	//		}
+	//	}
 
-		//swap first element with max element
-		char temp = huffchars[i];
-		huffchars[i] = huffchars[minIndex];
-		huffchars[minIndex] = temp;
-	}
+	//	//swap first element with max element
+	//	char temp = huffchars[i];
+	//	huffchars[i] = huffchars[minIndex];
+	//	huffchars[minIndex] = temp;
+	//}
 
 	struct Bounds
 	{
@@ -501,8 +525,32 @@ void Compressor::shannonFanoDecode(std::stringstream & compressedData, std::iost
 		for (i = curr.start; i < curr.end; i++) {
 
 			if (subTotal + frequencies[huffchars[i]] > halfTotal) {
+
+				//both total are equally close
 				//add the last element
-				if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) < std::abs(halfTotal - subTotal)) {
+				if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) - std::abs(halfTotal - subTotal) < 0.000001f) {
+					//std::cout << "Close Enough" << std::endl;
+					subTotal += frequencies[huffchars[i]];
+					int splitIndex = i + 1;
+					Bounds bottom = { curr.start, splitIndex, subTotal };
+					Bounds top = { splitIndex, curr.end, curr.total - subTotal };
+
+					//push 1 for the bottom
+					for (int j = curr.start; j < splitIndex; j++) {
+						codes[huffchars[j]].push_back(1);
+					}
+					//push 0 for the top
+					for (int j = splitIndex; j < curr.end; j++) {
+						codes[huffchars[j]].push_back(0);
+					}
+
+					indices.push(bottom);
+					indices.push(top);
+					break;
+				}
+
+				//add the last element
+				else if (std::abs(halfTotal - (subTotal + frequencies[huffchars[i]])) < std::abs(halfTotal - subTotal)) {
 					subTotal += frequencies[huffchars[i]];
 					int splitIndex = i + 1;
 					Bounds bottom = { curr.start, splitIndex, subTotal };
